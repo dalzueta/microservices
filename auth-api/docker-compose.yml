@@ -1,0 +1,29 @@
+version: '3'
+services:
+  mariadb:
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: authdb
+    ports:
+      - "3306:3306"
+  auth-api:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      DB_DSN: "root:example@tcp(mariadb:3306)/authdb?charset=utf8mb4&parseTime=True&loc=Local"
+    depends_on:
+      - mariadb
+  admin-api:
+    build: ../admin-api
+    ports:
+      - "8081:8081"
+    depends_on:
+      - mariadb
+      - auth-api
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mariadb://mariadb:3306/authdb
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: example
+      AUTH_API_URL: http://auth-api:8080
