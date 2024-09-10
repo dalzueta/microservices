@@ -1,40 +1,53 @@
-version: '3'
+---
+version: "3"
 services:
   mariadb:
     image: mariadb:latest
+    container_name: mariadb
     environment:
       MYSQL_ROOT_PASSWORD: example
       MYSQL_DATABASE: authdb
     ports:
-      - "3306:3306"
+      - 3306:3306
+    networks:
+      - mynetwork
   auth-api:
     build: .
+    container_name: auth-api
     ports:
-      - "8080:8080"
+      - 8080:8080
     environment:
-      DB_DSN: "root:example@tcp(mariadb:3306)/authdb?charset=utf8mb4&parseTime=True&loc=Local"
+      DB_DSN: root:example@tcp(mariadb:3306)/authdb?charset=utf8mb4&parseTime=True&loc=Local
     depends_on:
       - mariadb
-      - dbmigration
+    networks:
+      - mynetwork
   admin-api:
     build: ../admin-api
+    container_name: admin-api
     ports:
-      - "8081:8081"
+      - 8081:8081
     depends_on:
       - mariadb
       - auth-api
-      - dbmigration
     environment:
       SPRING_DATASOURCE_URL: jdbc:mariadb://mariadb:3306/authdb
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: example
       AUTH_API_URL: http://auth-api:8080
+    networks:
+      - mynetwork
   dbmigration:
     build: ../dbmigration
+    container_name: db-migration
     depends_on:
       - mariadb
+    networks:
+      - mynetwork
     environment:
       SPRING_DATASOURCE_URL: jdbc:mariadb://mariadb:3306/authdb
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: example
       AUTH_API_URL: http://auth-api:8080
+networks:
+  mynetwork: null

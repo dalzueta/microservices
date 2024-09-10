@@ -1,19 +1,16 @@
-FROM maven:3.8.1-openjdk-11 AS build
+FROM liquibase/liquibase:latest
 
-WORKDIR /app
+WORKDIR /liquibase
 
-COPY src/main/resources/db/changelog .
+COPY src/main/resources/db/changelog /liquibase/changelog
+COPY src/main/resources/liquibase.properties /liquibase/liquibase.properties
 
-RUN mvn clean package
 
-FROM openjdk:11-jre-slim
+WORKDIR /liquibase
+USER root
+RUN chmod -R 644 /liquibase/changelog/changes
 
-WORKDIR /app
+ENTRYPOINT ["liquibase", "--changeLogFile=changelog/changelog-master.xml", "update"]
 
-COPY --from=build /app/target/dbmigration-1.0-SNAPSHOT.jar /app/db-migration.jar
 
-# Copia el archivo liquibase.properties
-COPY src/main/resources/liquibase.properties /app/liquibase.properties
 
-# Comando para ejecutar las migraciones de Liquibase
-ENTRYPOINT ["java", "-jar", "/app/db-migration.jar", "update"]
