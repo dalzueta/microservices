@@ -15,6 +15,7 @@ services:
       DB_DSN: "root:example@tcp(mariadb:3306)/authdb?charset=utf8mb4&parseTime=True&loc=Local"
     depends_on:
       - mariadb
+      - dbmigration
   admin-api:
     build: ../admin-api
     ports:
@@ -22,6 +23,16 @@ services:
     depends_on:
       - mariadb
       - auth-api
+      - dbmigration
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mariadb://mariadb:3306/authdb
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: example
+      AUTH_API_URL: http://auth-api:8080
+  dbmigration:
+    build: ../dbmigration
+    depends_on:
+      - mariadb
     environment:
       SPRING_DATASOURCE_URL: jdbc:mariadb://mariadb:3306/authdb
       SPRING_DATASOURCE_USERNAME: root

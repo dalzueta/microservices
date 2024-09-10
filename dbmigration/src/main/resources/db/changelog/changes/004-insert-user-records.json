@@ -1,0 +1,98 @@
+{
+  "databaseChangeLog": [
+    {
+      "changeSet": {
+        "id": "004-insert-user-records",
+        "author": "daniel",
+        "changes": [
+          {
+            "insert": {
+              "tableName": "user",
+              "columns": [
+                {
+                  "column": {
+                    "name": "id",
+                    "valueNumeric": 1
+                  }
+                },
+                {
+                  "column": {
+                    "name": "created_at",
+                    "value": null
+                  }
+                },
+                {
+                  "column": {
+                    "name": "password",
+                    "value": "$2a$10$504GNpVG32aHrwclP4jHPOhZXMz5nAwsLUNaSDC9RgzZalvRP01wy"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "token",
+                    "value": null
+                  }
+                },
+                {
+                  "column": {
+                    "name": "token_type",
+                    "value": null
+                  }
+                },
+                {
+                  "column": {
+                    "name": "username",
+                    "value": "test"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "insert": {
+              "tableName": "user",
+              "columns": [
+                {
+                  "column": {
+                    "name": "id",
+                    "valueNumeric": 1
+                  }
+                },
+                {
+                  "column": {
+                    "name": "created_at",
+                    "value": null
+                  }
+                },
+                {
+                  "column": {
+                    "name": "password",
+                    "value": "$2a$10$504GNpVG32aHrwclP4jHPOhZXMz5nAwsLUNaSDC9RgzZalvRP01wy"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "token",
+                    "value": null
+                  }
+                },
+                {
+                  "column": {
+                    "name": "token_type",
+                    "value": null
+                  }
+                },
+                {
+                  "column": {
+                    "name": "username",
+                    "value": "test2"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

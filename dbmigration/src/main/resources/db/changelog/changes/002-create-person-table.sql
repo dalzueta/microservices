@@ -1,0 +1,6 @@
+CREATE TABLE person (
+    id BIGINT(20) NOT NULL AUTO_INCREMENT,
+    name VARCHAR(255) NULL,
+    user_id BIGINT(20) NULL,
+    PRIMARY KEY (id)
+);

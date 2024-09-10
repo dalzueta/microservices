@@ -1,0 +1,10 @@
+<changeSet id="003-insert-records-person-table" author="daniel">
+  <insert tableName="person">
+    <column name="name" value="John Doe"/>
+    <column name="user_id" value="1"/>
+  </insert>
+  <insert tableName="person">
+    <column name="name" value="Jane Smith"/>
+    <column name="user_id" value="1"/>
+  </insert>
+</changeSet>
