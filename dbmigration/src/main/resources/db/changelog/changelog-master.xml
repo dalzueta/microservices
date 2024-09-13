@@ -5,37 +5,37 @@
   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-<!--  <include file="001-initial-setup.xml"/>-->
+  <include file="changelog/changes/001-initial-setup.xml"/>
 
-<!--  <changeSet id="002-create-person-table" author="daniel">-->
-<!--    <sqlFile path="changes/002-create-person-table.sql" />-->
-<!--  </changeSet>-->
-
-<!--  <include file="changes/003-insert-person-records.xml"/>-->
-
-<!--  <include file="changes/004-insert-user-records.json"/>-->
-
-
-  <changeSet id="1-create-user-table" author="user">
-    <createTable tableName="user">
-      <column name="id" type="bigint">
-        <constraints primaryKey="true" nullable="false"/>
-      </column>
-      <column name="created_at" type="datetime(6)">
-        <constraints nullable="true"/>
-      </column>
-      <column name="password" type="varchar(255)">
-        <constraints nullable="true"/>
-      </column>
-      <column name="token" type="varchar(255)">
-        <constraints nullable="true"/>
-      </column>
-      <column name="token_type" type="varchar(255)">
-        <constraints nullable="true"/>
-      </column>
-      <column name="username" type="varchar(255)">
-        <constraints nullable="true"/>
-      </column>
-    </createTable>
+  <changeSet id="002-create-person-table" author="daniel">
+    <sqlFile path="changelog/changes/002-create-person-table.sql" />
   </changeSet>
+
+  <include file="changelog/changes/003-insert-person-records.xml"/>
+
+  <include file="changelog/changes/004-insert-user-records.json"/>
+
+
+<!--  <changeSet id="1-create-user-table" author="user">-->
+<!--    <createTable tableName="user">-->
+<!--      <column name="id" type="bigint">-->
+<!--        <constraints primaryKey="true" nullable="false"/>-->
+<!--      </column>-->
+<!--      <column name="created_at" type="datetime(6)">-->
+<!--        <constraints nullable="true"/>-->
+<!--      </column>-->
+<!--      <column name="password" type="varchar(255)">-->
+<!--        <constraints nullable="true"/>-->
+<!--      </column>-->
+<!--      <column name="token" type="varchar(255)">-->
+<!--        <constraints nullable="true"/>-->
+<!--      </column>-->
+<!--      <column name="token_type" type="varchar(255)">-->
+<!--        <constraints nullable="true"/>-->
+<!--      </column>-->
+<!--      <column name="username" type="varchar(255)">-->
+<!--        <constraints nullable="true"/>-->
+<!--      </column>-->
+<!--    </createTable>-->
+<!--  </changeSet>-->
 </databaseChangeLog>
